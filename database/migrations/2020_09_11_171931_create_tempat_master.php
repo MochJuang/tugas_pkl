@@ -15,7 +15,21 @@ class CreateTempatMaster extends Migration
     {
         Schema::create('tempats', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_tempat');
+            $table->string('deskripsi');
+            $table->bigInteger('id_fasilitas')->unsigned();
+            $table->string('no_telp');
+            $table->string('email');
+            $table->integer('jum_positif');
+            $table->string('alamat');
+            $table->integer('limit');
+            $table->string('foto');
+            $table->string('jadwal_buka');
+            $table->boolean('is_konfirmasi');
+            $table->boolean('is_block');
             $table->timestamps();
+
+            $table->foreign('id_fasilitas')->references('id')->on('fasilitas_masters');
         });
     }
 

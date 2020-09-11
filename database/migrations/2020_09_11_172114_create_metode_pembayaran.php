@@ -15,6 +15,7 @@ class CreateMetodePembayaran extends Migration
     {
         Schema::create('metodes', function (Blueprint $table) {
             $table->id();
+            $table->string('metode');
             $table->timestamps();
         });
     }

@@ -15,6 +15,12 @@ class CreateMember extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('alamat');
+            $table->date('tgl_lahir');
+            $table->integer('umur');
+            $table->string('email');
+
             $table->timestamps();
         });
     }
@@ -22,7 +28,7 @@ class CreateMember extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return voidgit
      */
     public function down()
     {

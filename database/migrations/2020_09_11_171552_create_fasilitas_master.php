@@ -15,6 +15,7 @@ class CreateFasilitasMaster extends Migration
     {
         Schema::create('fasilitas_masters', function (Blueprint $table) {
             $table->id();
+            $table->string('fasilitas');
             $table->timestamps();
         });
     }

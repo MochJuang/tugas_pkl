@@ -15,6 +15,7 @@ class CreateJenisMaster extends Migration
     {
         Schema::create('jenis_masters', function (Blueprint $table) {
             $table->id();
+            $table->string('jenis');
             $table->timestamps();
         });
     }

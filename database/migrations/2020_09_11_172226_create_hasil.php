@@ -15,7 +15,12 @@ class CreateHasil extends Migration
     {
         Schema::create('hasils', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_pendaftaran')->unsigned();
+            $table->enum('hasil',['positif','negatif']);
             $table->timestamps();
+
+            $table->foreign('id_pendaftaran')->references('id')->on('pendaftarans');
+
         });
     }
 
