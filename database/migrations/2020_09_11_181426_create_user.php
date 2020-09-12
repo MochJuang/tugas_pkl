@@ -21,7 +21,7 @@ class CreateUser extends Migration
             $table->bigInteger('id_tempat')->unsigned();
             $table->timestamps();
 
-            $table->foreign('id_tempat')->references('tempats')->on('id');
+            $table->foreign('id_tempat')->references('id')->on('tempats');
 
         });
     }

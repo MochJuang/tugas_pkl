@@ -18,11 +18,11 @@ class CreateAntrians extends Migration
             $table->bigInteger('id_daftar')->unsigned();
             $table->bigInteger('id_tgl')->unsigned();
             $table->integer('no_antrian')->unsigned();
-            
+
             $table->timestamps();
 
             $table->foreign('id_daftar')->references('id')->on('pendaftarans');
-            $table->foreign('id_tgl')->references('id')->on('tgl_test');
+            $table->foreign('id_tgl')->references('id')->on('tgl_tests');
 
         });
     }
