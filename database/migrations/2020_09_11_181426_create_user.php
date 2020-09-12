@@ -17,6 +17,7 @@ class CreateUser extends Migration
             $table->id();
             $table->string('username');
             $table->string('password');
+            $table->string('no_token');
             $table->bigInteger('id_tempat')->unsigned();
             $table->timestamps();
 

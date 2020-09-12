@@ -18,6 +18,7 @@ class CreateTempatMaster extends Migration
             $table->string('nama_tempat');
             $table->string('deskripsi');
             $table->bigInteger('id_fasilitas')->unsigned();
+            $table->bigInteger('click')->unsigned();
             $table->string('no_telp');
             $table->string('email');
             $table->integer('jum_positif');
