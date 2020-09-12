@@ -13,7 +13,7 @@ class CreateNoAntrian extends Migration
      */
     public function up()
     {
-        Schema::create('tgl_test', function (Blueprint $table) {
+        Schema::create('tgl_tests', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
             $table->timestamps();
