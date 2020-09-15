@@ -14,4 +14,16 @@ class HomeController extends Controller
     {
         return view('front/detail');
     }
+    public function daftar($id)
+    {
+        return view('front/daftar');
+    }
+    public function register($id)
+    {
+        return view('front/register');
+    }
+    public function success($id)
+    {
+        return view('front/success');
+    }
 }

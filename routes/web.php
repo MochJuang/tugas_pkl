@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Landing Page
+
 Route::get('/','HomeController@index');
 Route::get('/detail/{id}','HomeController@detail');
+Route::get('/daftar/{id}','HomeController@daftar');
+Route::get('/register/{id}','HomeController@register');
+Route::get('/success/{id}','HomeController@success');
 
-// Backend
+// -------------- Backend ------------------
 
