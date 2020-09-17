@@ -1,117 +1,80 @@
 @extends('back.layoutAuth')
-@section('title','Register')
-
-        @section('content')
-        <script>
-            $(document).ready(function(){
-            })
-        </script>
-		<div class="account-pages"></div>
+@section('title','Confirm')
+@section('content')
+<div class="account-pages"></div>
 		<div class="clearfix"></div>
 		<div class="wrapper-page">
-			<div class="w-50 card-box">
+			<div class=" card-box">
 				<div class="panel-heading">
-					<h3 class="text-center"> Sign Up to <strong class="text-custom">UBold</strong> </h3>
+					<h3 class="text-center"> <strong class="text-custom">Register</strong> </h3>
 				</div>
 
 				<div class="panel-body">
-					<form class="form-horizontal m-t-20" action="index.html">
+					<form class="form-horizontal m-t-20" action="/auth/actRegister" method="POST">
+                        {{ csrf_field() }}
+						<div class="form-group ">
+                            <label for="">Username</label>
+							<div class="col-xs-12">
+								<input class="form-control mb-3" name="username" value="{{ old('username') }}" type="text" required="" >
+                                @error('username')
+                                    <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+						</div>
 
-						<div class="form-group ">
-                            <label for="">Nama Lembaga</label>
+						<div class="form-group">
+                            <label for="">Password</label>
 							<div class="col-xs-12">
-								<input class="form-control" type="text" required="" >
-							</div>
-						</div>
-						<div class="form-group ">
-                            <label for="">Deskripsi</label>
-							<div class="col-xs-12">
-								<textarea name="deskripsi" class="form-control"></textarea>
-							</div>
-						</div>
-						<div class="form-group ">
-                            <label for="">Pilih Jenis Lembaga</label>
-							<div class="col-xs-12">
-                                <select class="form-control" name="Fasilitis" id="">
-                                    <option>Rumah Sakit</option>
-                                    <option>Poskesmas</option>
-                                </select>
-							</div>
-						</div>
-						<div class="form-group ">
-                            <label for="">No Telepon</label>
-							<div class="col-xs-12">
-								<input class="form-control" type="number" required="">
-							</div>
-						</div>
-						<div class="form-group ">
-                            <label for="">Email</label>
-							<div class="col-xs-12">
-                                <input class="form-control" type="email" required="">
-							</div>
-						</div>
-                        <div class="form-group ">
-                            <label for="">Jumlah Negatif</label>
-                            <div class="col-xs-12">
-                                <input class="form-control" type="number" required="">
+								<input class="form-control mb-3" name="password" value="{{ old('password') }}" type="password" required="" >
+                                @error('password')
+                                    <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="">Alamat</label>
-							<div class="col-xs-12">
-								<textarea name="alamat" class="form-control"></textarea>
-							</div>
 						</div>
-                        <div class="form-group ">
-                            <label for="">No Rekening</label>
+						<div class="form-group">
+                            <label for="">Confirm Password</label>
 							<div class="col-xs-12">
-								<input type="text" name="" class="form-control" id="">
-							</div>
+								<input class="form-control mb-3" name="confirm_password" value="{{ old('confirm_password') }}" type="password" required="" >
+                                @error('confirm_password')
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
 						</div>
-                        <div class="form-group">
-                            <label class="control-label">Foto</label>
-                            <div class="col-xs-12">
-                                <input type="file" class="filestyle" data-buttonbefore="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">
-                                <div class="checkbox checkbox-primary">
-									<input id="checkbox-swab" type="checkbox" name="swab" value="true">
-									<label for="checkbox-swab">SWAB</a></label>
-								</div>
-                            </label>
-                            <div class="col-sm-6">
-                                <p class="form-control-static"><input name="harga_swab" placeholder="Harga" class="form-control" type="text"></p>
-                            </div>
-                            <div class="col-sm-3">
-                                <p class="form-control-static"><input name="limit_swab" placeholder="Limit" class="form-control" type="text"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">
-                                <div class="checkbox checkbox-primary">
-									<input id="checkbox-rapid" type="checkbox" name="rapid" value="true">
-									<label for="checkbox-rapid">RAPID</a></label>
-								</div>
-                            </label>
-                            <div class="col-sm-6">
-                                <p class="form-control-static"><input name="harga_rapid" placeholder="Harga" class="form-control" type="text"></p>
-                            </div>
-                            <div class="col-sm-3">
-                                <p class="form-control-static"><input name="limit_rapid" placeholder="Limit" class="form-control" type="text"></p>
-                            </div>
-                        </div>
-
-
 
 						<div class="form-group">
 							<div class="col-xs-12">
 								<div class="checkbox checkbox-primary">
-									<input id="checkbox-signup" type="checkbox" checked="checked">
+									<input id="checkbox-signup" name="check" type="checkbox">
 									<label for="checkbox-signup">I accept <a href="#">Terms and Conditions</a></label>
-								</div>
+                                </div>
+                                @error('check')
+                                <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    {{ $message }}
+                                </div>
+                                @enderror
+
 							</div>
 						</div>
 
@@ -123,22 +86,18 @@
 							</div>
 						</div>
 
-                    </form>
+					</form>
 
-                </div>
+				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-12 text-center">
-                    <p>
-						Already have account?<a href="page-login.html" class="text-primary m-l-5"><b>Sign In</b></a>
+					<p>
+						Already have account?<a href="/auth" class="text-primary m-l-5"><b>Sign In</b></a>
 					</p>
 				</div>
-            </div>
+			</div>
 
-        </div>
-
-        <script src="/back/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
-
-
-		@endsection
+		</div>
+@endsection

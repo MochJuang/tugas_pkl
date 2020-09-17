@@ -78,7 +78,7 @@
                                             <td><span class="label label-table label-success">Active</span></td>
                                             <td>22 Jun 1972</td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                 </table>
                             </div>
                         </div>

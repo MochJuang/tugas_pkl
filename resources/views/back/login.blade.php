@@ -7,34 +7,48 @@
         <div class="wrapper-page">
         	<div class=" card-box">
             <div class="panel-heading">
-                <h3 class="text-center"> Sign In to <strong class="text-custom">UBold</strong> </h3>
+                <h3 class="text-center"> LOGIN </h3>
             </div>
-
+            @if(session()->has('message'))
+                <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    {{ session()->get('message') }}
+                </div>
+            @endif
 
             <div class="panel-body">
-            <form class="form-horizontal m-t-20" action="index.html">
-
+            <form class="form-horizontal m-t-20" action="/auth/actLogin" method="post">
+                {{ csrf_field() }}
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Username">
+                        <input class="form-control" value="{{ old('username') }}" name="username" type="text" required="" placeholder="Username">
+                        @error('username')
+                            <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="password" required="" placeholder="Password">
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <div class="checkbox checkbox-primary">
-                            <input id="checkbox-signup" type="checkbox">
-                            <label for="checkbox-signup">
-                                Remember me
-                            </label>
-                        </div>
-
+                        <input class="form-control" value="{{ old('password') }}" name="password" type="password" required="" placeholder="Password">
+                        @error('password')
+                            <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -44,18 +58,12 @@
                     </div>
                 </div>
 
-                <div class="form-group m-t-30 m-b-0">
-                    <div class="col-sm-12">
-                        <a href="page-recoverpw.html" class="text-dark"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
-                    </div>
-                </div>
             </form>
-
             </div>
             </div>
                 <div class="row">
             	<div class="col-sm-12 text-center">
-            		<p>Don't have an account? <a href="page-register.html" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+            		<p>Don't have an account? <a href="/auth/register" class="text-primary m-l-5"><b>Sign Up</b></a></p>
 
                     </div>
             </div>

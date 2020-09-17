@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Tgl_test extends Model
 {
-    protected $table = "users";
+    protected $table = "tgl_tests";
     protected $guarded = [];
 }

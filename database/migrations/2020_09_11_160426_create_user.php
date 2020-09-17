@@ -18,10 +18,8 @@ class CreateUser extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('no_token');
-            $table->bigInteger('id_tempat')->unsigned();
+            $table->string('posisi');
             $table->timestamps();
-
-            $table->foreign('id_tempat')->references('id')->on('tempats');
 
         });
     }

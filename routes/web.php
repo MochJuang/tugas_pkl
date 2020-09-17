@@ -25,10 +25,15 @@ Route::get('/success/{id}','HomeController@success');
 // -------------- Backend ------------------
 
 // Auth
+Route::get('auth/success/','AuthController@success');
 Route::get('/auth','AuthController@login');
 Route::get('/auth/register','AuthController@register');
-Route::get('/auth/confirmRegister','AuthController@confirmRegister');
+Route::post('/auth/actRegister','AuthController@actRegister');
+Route::post('/auth/actLogin','AuthController@actLogin');
+Route::post('/auth/actRegisterTempat','AuthController@actRegisterTempat');
+Route::get('/auth/registerTempat','AuthController@registerTempat');
 Route::get('/admin','AuthController@index');
+Route::get('/logout','AuthController@logout');
 
 // SuperAdmin
 Route::get('/admin/confirm','SuperAdminController@confirm');

@@ -33,8 +33,8 @@
                                 <thead>
                                     <tr>
                                         <th data-field="No" data-switchable="false">No</th>
-                                        <th data-field="Nama Lembaga">Nama Lembaga</th>
-                                        <th data-field="Jenis">Jenis</th>
+                                        <th data-field="Nama">Nama</th>
+                                        <th data-field="jenis">Jenis</th>
                                         <th data-field="Email">Email</th>
                                         <th data-field="Action" class="text-center">Action</th>
                                     </tr>
