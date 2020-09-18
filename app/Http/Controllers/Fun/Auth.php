@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Fun;
 use \App\User;
-// use Illuminate\
+use Illuminate\Support\Facades\DB;
 
 class Auth
 {
 
     public static function getId($token)
     {
-        return (User::where(['no_token' => $token])->first()->id) ?? false;
+        return ($id = User::where(['no_token' => $token])->first()->id) ? $id :  false;
     }
 
     public static function register_user($request)
@@ -29,9 +29,9 @@ class Auth
         ];
         return (User::insert($data)) ? $noToken : false ;
     }
-    public static function getName()
+    public static function getName($token)
     {
-        return User::where(['no_token' => session('no_token')])->first()->username;
+        return User::where(['no_token' => $token])->first()->username;
     }
     public static function login($request)
     {
@@ -44,8 +44,11 @@ class Auth
             'password'  => md5($data['password']),
         ];
         $data = User::where($data)->first();
-        if($data){
-            $data = ['no_token' => $data['no_token'], 'posisi' => $data['posisi']];
+        if($data['posisi'] == 'admin'){
+            $data = DB::table('tempats')->join('users','users.id','=','tempats.id_user')->where('users.id',$data['id'])->first();
+            $data = ['user_token' => $data->no_token, 'posisi' => $data->posisi, 'confirm' => $data->is_konfirmasi, 'block' => $data->is_block];
+        }else{
+            $data = ['user_token' => $data['no_token'], 'posisi' => $data['posisi']];
         }
         return ($data) ? $data : false;
     }

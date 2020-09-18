@@ -21,6 +21,19 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success alert-dismissible" style="margin-top: 10px !important" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="card-box">
                         <div class="card-header"><h3>Block Lembaga</h3></div>
@@ -41,13 +54,24 @@
                                 </thead>
 
                                 <tbody>
+                                    @php $no = 1 @endphp
+                                    @foreach (\App\Http\Controllers\Fun\SuperAdmin::getTempats(1) as $item)
                                     <tr>
-                                        <td>dfgsdf</td>
-                                        <td>dfgsdf</td>
-                                        <td>dfgsdf</td>
-                                        <td>dfgsdf</td>
-                                        <td>dfgsdf</td>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $item->nama_tempat }}</td>
+                                        <td>{{ $item->fasilitas }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>
+                                            @php $act = ($item->is_block) ? 'active' : 'block' @endphp
+                                            <form action="/admin/{{ $act }}Act" method="post">
+                                            @method('put')
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="submit" class="btn btn-sm btn-{{ ($act === 'block') ? 'danger' : 'primary' }}" name="submit" value="{{ $act }}">
+                                            </form>
+                                        </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

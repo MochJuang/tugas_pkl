@@ -25,19 +25,22 @@ Route::get('/success/{id}','HomeController@success');
 // -------------- Backend ------------------
 
 // Auth
-Route::get('auth/success/','AuthController@success');
+Route::get('auth/success/','AuthController@success')->middleware('login');
 Route::get('/auth','AuthController@login');
 Route::get('/auth/register','AuthController@register');
-Route::post('/auth/actRegister','AuthController@actRegister');
+Route::post('/auth/actRegister','AuthController@actRegister')->middleware('login');
 Route::post('/auth/actLogin','AuthController@actLogin');
-Route::post('/auth/actRegisterTempat','AuthController@actRegisterTempat');
-Route::get('/auth/registerTempat','AuthController@registerTempat');
-Route::get('/admin','AuthController@index');
-Route::get('/logout','AuthController@logout');
+Route::post('/auth/actRegisterTempat','AuthController@actRegisterTempat')->middleware('login');
+Route::get('/auth/registerTempat','AuthController@registerTempat')->middleware('login');
+Route::get('/admin','AuthController@index')->middleware('login');
+Route::get('/logout','AuthController@logout')->middleware('login');
 
 // SuperAdmin
-Route::get('/admin/confirm','SuperAdminController@confirm');
-Route::get('/admin/block','SuperAdminController@block');
+Route::get('/admin/confirm','SuperAdminController@confirm')->middleware('login');
+Route::get('/admin/block','SuperAdminController@block')->middleware('login');
+Route::put('/admin/confirmAct','SuperAdminController@confirmAct')->middleware('login');
+Route::put('/admin/blockAct','SuperAdminController@blockAct')->middleware('login');
+Route::put('/admin/activeAct','SuperAdminController@activeAct')->middleware('login');
 
 // Admin
 Route::get('/admin/reg','AdminController@register');
