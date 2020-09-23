@@ -19,6 +19,7 @@ class CreateJenis extends Migration
             $table->bigInteger('id_jenis')->unsigned();
             $table->integer('harga')->unsigned();
             $table->integer('limit')->unsigned();
+            $table->integer('is_seda');
             $table->timestamps();
 
             $table->foreign('id_tempat')->references('id')->on('tempats');

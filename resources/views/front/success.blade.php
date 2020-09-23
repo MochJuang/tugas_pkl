@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center align-items-center">
-                    <h1>Terima Kasih Pembayaran Anda Sedang Kami Prosess</h1>
+                    <h1>Terima Kasih Pembayaran Anda Sedang Kami Prosess</h1>t
                 </div>
             </div>
         </div>

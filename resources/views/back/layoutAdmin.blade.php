@@ -20,6 +20,8 @@
         <link href="/back/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="/back/assets/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="/back/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <script src="/back/assets/js/jquery.min.js"></script>
+
 
         <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,7 +46,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Ub<i class="md md-album"></i>ld</span></a>
+                        <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span><i class="md md-album">Covpedia</i></span></a>
                         <!-- Image Logo here -->
                         <!--<a href="index.html" class="logo">-->
                             <!--<i class="icon-c-logo"> <img src="/back/assets/images/logo_sm.png" height="42"/> </i>-->
@@ -71,6 +73,7 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="/back/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> {{\App\Http\Controllers\Fun\Auth::getName(session('user_token'))}}</a>
                                     <ul class="dropdown-menu">
+                                        <li><a href="/admin/profile"><i class="fa fa-user m-r-10 text-primary"></i> Profile</a></li>
                                         <li><a href="/logout"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                                     </ul>
                                 </li>
@@ -98,6 +101,7 @@
                                 <a href="/admin/reg" class="waves-effect"><i class="fa fa-book"></i> <span> Registrasi </span></a>
                                 <a href="/admin/pendaftaran" class="waves-effect"><i class="fa fa-newspaper-o"></i> <span> Pendaftar </span></a>
                                 <a href="/admin/test" class="waves-effect"><i class="fa fa-check-square-o"></i> <span> Test Covid </span></a>
+                                <a href="/" class="waves-effect"><i class="fa fa-paper-plane"></i> <span> Kembali </span></a>
                             </li>
 
 
@@ -116,7 +120,6 @@
             </script>
 
             <!-- jQuery  -->
-            <script src="/back/assets/js/jquery.min.js"></script>
             <script src="/back/assets/js/bootstrap.min.js"></script>
             <script src="/back/assets/js/detect.js"></script>
             <script src="/back/assets/js/fastclick.js"></script>

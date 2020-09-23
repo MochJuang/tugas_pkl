@@ -12,6 +12,12 @@
                 <div class="panel-body text-center">
                     <h1>Terima Kasih</h1>
                     <h2>Prosess Pendaftaran Kamu Sedang Kami Proses !</h2>
+                    <div class="row">
+                      <div class="col text-center">
+                        <a href="/auth" class="btn btn-success">Kembali Login !!</a>
+                      </div>
+                    </div>
+
                 </div>
             </div>
         </div>

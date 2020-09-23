@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\DB;
 
 class Auth
 {
+    public static function confirmPassword($pass,$token)
+    {
+        return (User::where(['password' => md5($pass), 'id' => Auth::getId($token)])->first()) ? true : false;
+    }
 
     public static function getId($token)
     {
@@ -51,6 +55,34 @@ class Auth
             $data = ['user_token' => $data['no_token'], 'posisi' => $data['posisi']];
         }
         return ($data) ? $data : false;
+    }
+    public static function getIdTempat($token)
+    {
+        return ($id = DB::table('tempats')->select('tempats.id')->join('users','users.id','=','tempats.id_user')->where('users.no_token',$token)->first()->id) ? $id : false ;
+    }
+    public static function jenisRegister($request,$token){
+        $id_tempat = Auth::getIdTempat($token);
+        if ($request->swab == 'on') {
+            $request->validate(['swab_harga' => 'required','swab_limit' => 'required']);
+        }else if ($request->rapid == 'on') {
+            $request->validate(['rapid_harga' => 'required','rapid_limit' => 'required']);
+        }else{
+            return redirect('auth/jenisRegister')->with('message','Setiap Lembaga Harus Mempunyai setidaknya 1 test');
+        }
+        $data = [[
+            'id_tempat' => $id_tempat,
+            'id_jenis'  => 1,
+            'harga'     => ($request->swab_harga) ? $request->swab_harga : 0 ,
+            'limit'     => ($request->swab_limit) ? $request->swab_limit : 0 ,
+            'is_sedia'  => ($request->swab) ? 1 : 0 ,
+        ],[
+            'id_tempat' => $id_tempat,
+            'id_jenis'  => 2,
+            'harga'     => ($request->rapid_harga) ? $request->rapid_harga : 0 ,
+            'limit'     => ($request->rapid_limit) ? $request->rapid_limit : 0 ,
+            'is_sedia'  => ($request->rapid) ? 1 : 0 ,
+        ]];
+        return (\App\Jenis::insert($data)) ? true : false;
     }
     public static function createSuperAdmin()
     {

@@ -55,7 +55,7 @@
 
                                 <tbody>
                                     @php $no = 1 @endphp
-                                    @foreach (\App\Http\Controllers\Fun\SuperAdmin::getTempats() as $item)
+                                    @foreach (\App\Http\Controllers\Fun\SuperAdmin::getTempats(0) as $item)
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $item->nama_tempat }}</td>

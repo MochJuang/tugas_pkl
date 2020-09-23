@@ -89,15 +89,7 @@
 						<div class="form-group ">
 							<div class="col-xs-6">
                                 @php $hari = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] @endphp
-								<select name="jadwal_buka1" class="form-control" id="">
-                                    @foreach ($hari as $item)
-                                        @if($item == old('jadwal_buka1'))
-                                            <option value="{{$item}}" selected>{{$item}}</option>
-                                        @else
-                                            <option value="{{$item}}">{{$item}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <input type="time" name="jadwal_buka1" value="{old{{'jadwal_buka1'}}}" class="form-control" id="">
                                 @error('jadwal_buka1')
                                     <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -109,15 +101,7 @@
                                 @enderror
 							</div>
                             <div class="col-xs-6">
-                                <select name="jadwal_buka2" class="form-control" id="">
-                                    @foreach ($hari as $item)
-                                        @if($item == old('jadwal_buka2'))
-                                            <option value="{{$item}}" selected>{{$item}}</option>
-                                        @else
-                                            <option value="{{$item}}">{{$item}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <input type="time" name="jadwal_buka2" value="{old{{'jadwal_buka2'}}}" class="form-control" id="">
                                 @error('jadwal_buka2')
                                     <div class="alert alert-danger alert-dismissible" style="margin-top: 10px !important" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

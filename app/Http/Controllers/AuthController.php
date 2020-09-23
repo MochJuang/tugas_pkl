@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Fun\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
     // protected $auth = new Auth();
@@ -25,10 +26,11 @@ class AuthController extends Controller
         // Auth::createSuperAdmin();
         return view('back.login');
     }
+
     public function actLogin(Request $request)
     {
         $data = Auth::login($request);
-        if($data != false){
+        if($data['user_token'] != false){
             if($data['posisi'] == 'superadmin'){
                 $request->session()->put('otority', md5('otoritas'));
                 $request->session()->put($data);
@@ -58,10 +60,18 @@ class AuthController extends Controller
         $request->session()->put('user_token',$data);
         return redirect('/auth/registerTempat');
     }
+    public function actJenis(Request $request)
+    {
+        return (Auth::jenisRegister($request,session('user_token'))) ? redirect('auth/success') : redirect('auth/jenis')->with('message','Gagal Memasukan Test');
+    }
+    public function jenisRegister()
+    {
+        return view('back.jenisRegister');
+    }
     public function actRegisterTempat(Request $request)
     {
         $data = Auth::register_tempat($request,session('user_token'));
-        return ($data) ? redirect('/auth/success') : redirect('/back/register');
+        return ($data) ? redirect('/auth/jenisRegister') : redirect('/back/register');
         // return redirect('/auth/registerTempat/'.$data);
     }
     public function success()

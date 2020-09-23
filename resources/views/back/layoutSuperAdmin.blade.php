@@ -102,6 +102,10 @@
                             <li class="has_sub">
                                 <a href="/admin/block" class="waves-effect"><i class="fa fa-ban"></i> <span> Block </span></span></a>
                             </li>
+                            <li class="has_sub">
+
+                                <a href="/" class="waves-effect"><i class="fa fa-paper-plane"></i> <span> Kembali </span></a>
+                            </li>
 
 
                         </ul>

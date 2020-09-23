@@ -16,7 +16,7 @@ class CreateTempatMaster extends Migration
         Schema::create('tempats', function (Blueprint $table) {
             $table->id();
             $table->string('nama_tempat');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->bigInteger('id_fasilitas')->unsigned();
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('click')->unsigned();

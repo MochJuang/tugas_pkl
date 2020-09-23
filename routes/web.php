@@ -28,11 +28,13 @@ Route::get('/success/{id}','HomeController@success');
 Route::get('auth/success/','AuthController@success')->middleware('login');
 Route::get('/auth','AuthController@login');
 Route::get('/auth/register','AuthController@register');
-Route::post('/auth/actRegister','AuthController@actRegister')->middleware('login');
+Route::post('/auth/actRegister','AuthController@actRegister');
 Route::post('/auth/actLogin','AuthController@actLogin');
 Route::post('/auth/actRegisterTempat','AuthController@actRegisterTempat')->middleware('login');
+Route::post('/auth/actJenis','AuthController@actJenis')->middleware('login');
 Route::get('/auth/registerTempat','AuthController@registerTempat')->middleware('login');
 Route::get('/admin','AuthController@index')->middleware('login');
+Route::get('/auth/jenisRegister','AuthController@jenisRegister')->middleware('login');
 Route::get('/logout','AuthController@logout')->middleware('login');
 
 // SuperAdmin
@@ -43,6 +45,14 @@ Route::put('/admin/blockAct','SuperAdminController@blockAct')->middleware('login
 Route::put('/admin/activeAct','SuperAdminController@activeAct')->middleware('login');
 
 // Admin
-Route::get('/admin/reg','AdminController@register');
-Route::get('/admin/pendaftaran','AdminController@daftar');
-Route::get('/admin/test','AdminController@test');
+Route::post('/admin/changeFoto/{id}','AdminController@changeFoto');
+Route::get('/admin/profile','AdminController@profile')->middleware('login');
+Route::get('/admin/reg','AdminController@register')->middleware('login');
+Route::get('/admin/pendaftaran','AdminController@daftar')->middleware('login');
+Route::get('/admin/test','AdminController@test')->middleware('login');
+Route::get('/admin/changeUtama','AdminController@changeUtama')->middleware('login');
+Route::put('/admin/actChangeUtama','AdminController@actChangeUtama')->middleware('login');
+Route::put('/admin/changeUser','AdminController@changeUser')->middleware('login');
+Route::get('/admin/changeDeskripsi','AdminController@changeDeskripsi')->middleware('login');
+Route::put('/admin/actChangeDeskripsi','AdminController@actChangeDeskripsi')->middleware('login');
+Route::put('/admin/editJenis','AdminController@editJenis')->middleware('login');

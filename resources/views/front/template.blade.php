@@ -57,8 +57,12 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="/auth">Login</a></li>
-          <li><a href="/auth/register">Register</a></li>
+            @if (session('user_token'))
+                <li><a href="/admin">{{\App\Http\Controllers\Fun\Auth::getName(session('user_token'))}}</a></li>
+            @else
+                <li><a href="/auth">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+            @endif
 
         </ul>
       </nav><!-- .nav-menu -->
