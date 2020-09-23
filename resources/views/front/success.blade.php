@@ -11,9 +11,9 @@
 
           <ol>
               <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li>Success</li>
         </ol>
-        <h2>Portfolio Details</h2>
+        <h2>Success</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -22,7 +22,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center align-items-center">
-                    <h1>Terima Kasih Pembayaran Anda Sedang Kami Prosess</h1>t
+                    <h1>Terima Kasih Pembayaran Anda Sedang Kami Prosess</h1>
+                    <a href="/" class="btn btn-success">Kembali Ke Beranda</a>
                 </div>
             </div>
         </div>

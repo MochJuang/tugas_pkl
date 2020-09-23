@@ -1,6 +1,48 @@
 @extends('front.template')
 @section('title','Register')
 @section('content')
+<script>
+  $(document).ready(function() {
+    function addClick(id) {
+      $.ajax({
+        url: '/addClick/'+id,
+      })
+    }
+    $('input[name=cari]').keyup(function(event) {
+      let data = $(this).val()
+      $.ajax({
+        url: '/cari',
+        type: 'get',
+        dataType: 'json',
+        data: {cari: data},
+        success:function(data) {
+          let result = ''
+          $.each(data, function(index, val) {
+             result +=   `<div class="col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="card mb-3">
+                              <div class="row no-gutters">
+                                <div class="col-md-4">
+                                  <img src="/storage/${val.foto}" class="card-img img-fluid" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                    <h5 class="card-title">${val.nama_tempat}</h5>
+                                    <p>${val.fasilitas} </p>
+                                    <p>${val.alamat} </p>
+                                    <a onclick="return addClick(${val.id})" href="/detail/${val.id}" class="card-link">Detail</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>    
+                          </div>`
+          });
+          $('#lists').html(result)
+        }
+      })
+      
+    });
+  });
+</script>
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
@@ -34,17 +76,17 @@
             <div class="row">
               @foreach($data as $item)
               <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3">
                   <div class="row no-gutters">
                     <div class="col-md-4">
-                      <img src="/storage/{{ $item->foto }}" class="card-img" alt="...">
+                      <img src="/storage/{{ $item->foto }}" class="card-img img-fluid" alt="...">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
                         <h5 class="card-title">{{ $item->nama_tempat }}</h5>
                         <p>{{ $item->fasilitas }} </p>
                         <p>{{ $item->alamat }} </p>
-                        <a href="/detail/{{ $item->id }}" class="card-link">Detail</a>
+                        <a onclick="return addClick(<?php echo $item->id ?>)"  class="card-link">Detail</a>
                       </div>
                     </div>
                   </div>
@@ -63,36 +105,14 @@
                 <div class="col-lg-12 text-center">
                 <h4>Pencarian Tempat</h4>
                 <form action="" method="post">
-                    <input type="text" name="email" class="form-control mb-5" placeholder="Cari Tempat....">
+                    <input type="text" name="cari" class="form-control mb-5" placeholder="Cari Tempat....">
                 </form>
                 </div>
             </div>
 
         <div class="row">
             <div class="col-lg-12 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
-                <ul class="list-unstyled">
-                    <li class="media">
-                      <img class="mr-3" src="/assets/img/virus.png" alt="Generic placeholder image">
-                      <div class="media-body">
-                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                      </div>
-                    </li>
-                    <li class="media my-4">
-                      <img class="mr-3" src="/assets/img/virus.png" alt="Generic placeholder image">
-                      <div class="media-body">
-                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                      </div>
-                    </li>
-                    <li class="media">
-                      <img class="mr-3" src="/assets/img/virus.png" alt="Generic placeholder image">
-                      <div class="media-body">
-                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                      </div>
-                    </li>
-                  </ul>
+              <div class="row" id="lists"></div>
             </div>
         </div>
 

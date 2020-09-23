@@ -20,13 +20,14 @@ class CreatePendaftaran extends Migration
             $table->bigInteger('id_metode')->unsigned();
             $table->bigInteger('id_jenis')->unsigned();
             $table->boolean('is_sudah');
+            $table->string('foto');
             $table->integer('qty');
             $table->bigInteger('total_bayar');
 
             $table->foreign('id_member')->references('id')->on('members');
             $table->foreign('id_tempat')->references('id')->on('tempats');
             $table->foreign('id_metode')->references('id')->on('metodes');
-            $table->foreign('id_jenis')->references('id')->on('jenis');
+            $table->foreign('id_jenis')->references('id')->on('jenis_masters');
 
 
             $table->timestamps();

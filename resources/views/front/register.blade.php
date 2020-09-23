@@ -1,7 +1,39 @@
 @extends('front.template')
 @section('title','Register')
 @section('content')
+<meta name="csrf-token" content="{!! csrf_token() !!}">
+<script type="text/javascript">
+    $(document).ready( function () {
 
+        $('#foto').change(function(e){
+            var file_data = $(this).prop("files")[0];
+            var form_data = new FormData();
+            form_data.append("foto", file_data);
+            let crsf = $('meta[name="csrf-token"]').attr('content')
+            let id = '{{ $id }}'
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/changeRegister/'+id,
+                dataType: 'script',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(data){
+                    // alert('succes')
+                    let path = '/storage/'+ JSON.parse(data)
+                    $('#foto_').attr('src',path)
+                }
+            });
+        })
+
+    });
+</script>
 
   <main id="main">
 
@@ -11,9 +43,9 @@
 
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li>Verfifikasi Pembayaran</li>
         </ol>
-        <h2>Portfolio Details</h2>
+        <h2>Vertifikasi Pembayaran</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -26,41 +58,53 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>Nama</th>
-                            <td>Moch Juang</td>
+                            <td>{{ $data->nama }}</td>
                         </tr>
                         <tr>
                             <th>Alamat</th>
-                            <td>Moch Juang</td>
+                            <td>{{ $data->alamat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Lahir</th>
+                            <td>{{ $data->tgl_lahir }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ $data->email }}</td>
                         </tr>
                         <tr>
                             <th>Umur</th>
-                            <td>Moch Juang</td>
+                            <td>{{ $data->umur }}</td>
                         </tr>
                         <tr>
                             <th>QTY</th>
-                            <td>Moch Juang</td>
+                            <td>{{ $data->qty }}</td>
                         </tr>
                         <tr>
                             <th>Jenis Test</th>
-                            <td>Moch Juang</td>
+                            <td>{{ $data->jenis }}</td>
                         </tr>
                         <tr>
                             <th>Harga Pertest</th>
-                            <td>Moch Juang</td>
+                            <td>Rp. {{ number_format($data->harga,0,',','.') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Metode Pembayaran</th>
+                            <td>{{ $data->metode }}</td>
                         </tr>
                         <tr>
                             <th>Total Harga</th>
-                            <td>Rp.300.000</td>
+                            <td>Rp. {{ number_format($data->total_bayar,0,',','.') }}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-12 col-md-6 text-center">
-                    <form action="" method="post">
+                    <form action="/success/{{ $id }}" method="post">
                         <div class="form-group">
                           <label for="">Upload Bukti Pembayaran</label>
-                          <input type="file" class="form-control-file" name="bukti" id="bukti" placeholder="" aria-describedby="fileHelpId">
+                          <input type="file" required="" class="form-control-file" id="foto" name="foto" id="bukti" placeholder="" aria-describedby="fileHelpId">
                         </div>
-                        <img src="/assets/img/virus.png " id="pembayaran" class="img-fluid" alt="">
+                        <img src="/storage/{{ $data->foto }}" id="foto_" class="img-fluid" alt="">
                         <button type="submit" class="btn btn-primary btn-block">Kirim</button>
                     </form>
                 </div>

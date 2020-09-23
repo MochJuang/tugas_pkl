@@ -64,6 +64,11 @@
                         <td>{{ ($jenis->is_sedia) ? "Tersedia" : "Tidak Tersedia" }}</td>
                       </tr>
                     <?php endforeach ?>
+                      <tr>
+                        <td colspan="4">
+                          <a href="/daftar/{{ $data->id }}" class="btn btn-success btn-block">Booking Online</a>
+                        </td>
+                      </tr>
                   </table>
                 </div>
               </div>

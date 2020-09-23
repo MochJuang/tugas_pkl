@@ -25,15 +25,6 @@
   <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
   <script src="/assets/vendor/jquery/jquery.min.js"></script>
- <script>
-     $(document).ready(function () {
-            console.log($('#pembayaran')[0].src)
-        $('input[name=bukti]').change(function(e){
-            console.log($('#bukti').val())
-            $('#pembayaran')[0].src = $('#bukti').val()
-        })
-     });
- </script>
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 
