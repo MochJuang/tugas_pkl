@@ -32,28 +32,28 @@
             </div>
 
             <div class="row">
-
+              @foreach($data as $item)
               <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="card mb-3" style="max-width: 540px;">
                   <div class="row no-gutters">
                     <div class="col-md-4">
-                      <img src="assets/img/virus.png" class="card-img" alt="...">
+                      <img src="/storage/{{ $item->foto }}" class="card-img" alt="...">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                          Nam
-                        </p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">{{ $item->nama_tempat }}</h5>
+                        <p>{{ $item->fasilitas }} </p>
+                        <p>{{ $item->alamat }} </p>
+                        <a href="/detail/{{ $item->id }}" class="card-link">Detail</a>
                       </div>
                     </div>
                   </div>
                 </div>    
               </div>
-
+              @endforeach
             </div>
 
+          </div>
         </div>
     </section><!-- End Services Section -->
 

@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use \App\Http\Controllers\Fun\Client;
+use \App\Http\Controllers\Fun\SuperAdmin as SA;
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('front/index');
+        return view('front/index',['data' => Client::GetTempats()]);
     }
     public function detail($id)
     {
-        return view('front/detail');
+        // dd(SA::GetJenis($id));
+        $data = [ 'data' => Client::GetTempatItem($id),'jenis' => SA::GetJenis($id) ];
+        // dd($data);
+        return view('front/detail', $data);
     }
     public function daftar($id)
     {
