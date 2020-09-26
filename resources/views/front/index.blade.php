@@ -18,7 +18,7 @@
         success:function(data) {
           let result = ''
           $.each(data, function(index, val) {
-             result +=   `<div class="col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+             result +=   `<div class="col-md-6 d-flex align-items-stretch" >
                             <div class="card mb-3">
                               <div class="row no-gutters">
                                 <div class="col-md-4">

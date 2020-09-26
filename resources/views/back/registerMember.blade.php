@@ -1,6 +1,24 @@
 @extends('back.layoutAdmin')
 @section('title','Dashboard')
 @section('content')
+<script>
+        $(document).ready(function(){
+            console.log($('input#all').prop('checked'))
+        $('input#all').click(function(){
+
+            console.log($('input#all'));
+            if($(this).prop("checked") == true){
+                $('input.child').prop('checked',true)
+            }
+
+            else if($(this).prop("checked") == false){
+                $('input.child').prop('checked',false)
+            }
+
+        });
+
+    });
+</script>
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -33,13 +51,15 @@
                                 <p class="text-muted m-b-30 font-13">
                                     Example of checkbox select (Your text goes here).
                                 </p>
-
+                                <form action="/admin/veritedMember" method="post">
+                                {{ csrf_field() }}
+                                @method('put')
                                 <table data-toggle="table"
                                        data-page-size="10"
                                        data-pagination="true" class="table-bordered ">
                                     <thead>
                                         <tr>
-                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th><input type="checkbox" id="all"></th>
                                             <th data-field="nama" data-switchable="false">Nama</th>
                                             <th data-field="jenis">Jenis Test</th>
                                             <th data-field="qty">QTY</th>
@@ -51,35 +71,21 @@
 
 
                                     <tbody>
+                                        @foreach($data as $item)
                                         <tr>
-                                            <td></td>
-                                            <td>Isidra</td>
-                                            <td>Boudreaux</td>
-                                            <td>Traffic Court Referee</td>
-                                            <td>22 Jun 1972</td>
-                                            <td><span class="label label-table label-success">Active</span></td>
-                                            <td>22 Jun 1972</td>
+                                            <td><input type="checkbox" class="child" name="data[]" value="{{ $item->id }}"></td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->jenis }}</td>
+                                            <td>{{ $item->qty }}</td>
+                                            <td>Rp. {{ number_format($item->total_bayar,0,',','.') }}</td>
+                                            <td><span class="label label-table label-success">{{ $item->metode }}</span></td>
+                                            <td><a href="/admin/registerTempat/{{ $item->id }}" class="btn btn-sm btn-success">Detail</a></td>
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Isidra</td>
-                                            <td>Boudreaux</td>
-                                            <td>Traffic Court Referee</td>
-                                            <td>22 Jun 1972</td>
-                                            <td><span class="label label-table label-success">Active</span></td>
-                                            <td>22 Jun 1972</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Isidra</td>
-                                            <td>Boudreaux</td>
-                                            <td>Traffic Court Referee</td>
-                                            <td>22 Jun 1972</td>
-                                            <td><span class="label label-table label-success">Active</span></td>
-                                            <td>22 Jun 1972</td>
-                                        </tr>
+                                        @endforeach
                                         </tbody>
                                 </table>
+                                <button type="submit" class="btn btn-success"> Konfirmasi </button>
+                                </form>
                             </div>
                         </div>
                     </div>

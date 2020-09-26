@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Fun\SuperAdmin as SA;
 use \App\Http\Controllers\Fun\Auth;
 use \App\Http\Controllers\Fun\Admin;
+use \App\Http\Controllers\Fun\Client;
 use Illuminate\Support\Facades\Storage;
 use \App\Tempat;
 use \Illuminate\Support\Facades\DB;
@@ -14,7 +15,9 @@ class AdminController extends Controller
 {
     public function register()
     {
-        return view('back.registerMember');
+        // dd(Admin::getPendaftar(session('user_token')));
+        $data['data'] = Admin::getPendaftar(session('user_token'));
+        return view('back.registerMember',$data);
     }
     public function daftar()
     {
@@ -23,6 +26,18 @@ class AdminController extends Controller
     public function test()
     {
         return view('back.testMember');
+    }
+    public function veritedMember(Request $request)
+    {
+        foreach ($request->data as $key => $value) {
+            dump(Admin::putPendaftaran($value));
+        }
+    }
+    public function registerTempat($id)
+    {
+        $data['data'] = Client::vertifikasi($id);
+        // dd($data);
+        return view('back.detailRegisterTempat',$data);
     }
     public function profile()
     {

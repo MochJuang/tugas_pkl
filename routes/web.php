@@ -52,6 +52,7 @@ Route::put('/admin/activeAct','SuperAdminController@activeAct')->middleware('log
 Route::post('/admin/changeFoto/{id}','AdminController@changeFoto');
 Route::get('/admin/profile','AdminController@profile')->middleware('login');
 Route::get('/admin/reg','AdminController@register')->middleware('login');
+Route::get('/admin/registerTempat/{id}','AdminController@registerTempat')->middleware('login');
 Route::get('/admin/pendaftaran','AdminController@daftar')->middleware('login');
 Route::get('/admin/test','AdminController@test')->middleware('login');
 Route::get('/admin/changeUtama','AdminController@changeUtama')->middleware('login');
@@ -60,3 +61,4 @@ Route::put('/admin/changeUser','AdminController@changeUser')->middleware('login'
 Route::get('/admin/changeDeskripsi','AdminController@changeDeskripsi')->middleware('login');
 Route::put('/admin/actChangeDeskripsi','AdminController@actChangeDeskripsi')->middleware('login');
 Route::put('/admin/editJenis','AdminController@editJenis')->middleware('login');
+Route::put('/admin/veritedMember','AdminController@veritedMember')->middleware('login');
