@@ -1,5 +1,5 @@
 @extends('back.layoutAuth')
-@section('title','Confirm')
+@section('title','Register')
 @section('content')
 <div class="account-pages"></div>
 		<div class="clearfix"></div>

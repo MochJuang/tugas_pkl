@@ -6,18 +6,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="btn-group pull-right m-t-15">
-                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
+                    <h4 class="page-title">List Member Yang Telah Terdaftar</h4>
+                    <p class="text-muted page-title-alt">Admin</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label col-md-3">Set Tanggal</label>
+                                        <div class="col-md-7">
+                                            <input type="date" value="{{ $date }}" class="form-control form-control-sm" name="date">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-success">Set</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <h4 class="page-title">Dashboard 2</h4>
-                    <p class="text-muted page-title-alt">Welcome to Ubold admin panel !</p>
                 </div>
             </div>
             <div class="row">
@@ -30,9 +41,11 @@
                                     <tr>
                                         <th data-toggle="Nama">Nama</th>
                                         <th data-hide="No Antrian">No Antrian</th>
-                                        <th data-hide="Tanggal">Tanggal</th>
+                                        <th data-hide="tgl_daftar">Tanggal Daftar</th>
                                         <th data-hide="Alamat">Alamat</th>
                                         <th data-hide="phone, tablet">Status</th>
+                                        <th data-hide="phone, tablet">Sudah</th>
+                                        <th data-hide="phone, tablet">Detail</th>
                                     </tr>
                                 </thead>
                                 <div class="form-inline m-b-20">
@@ -55,34 +68,18 @@
                                     </div>
                                 </div>
                                 <tbody>
+                                    @foreach($data as $data)
                                     <tr>
-                                        <td>Isidra</td>
-                                        <td>Boudreaux</td>
-                                        <td>Traffic Court Referee</td>
-                                        <td>22 Jun 1972</td>
-                                        <td><span class="label label-table label-success">SWAB</span></td>
+                                        <td>{{ $data->nama }}</td>
+                                        <td>{{ $data->no_antrian }}</td>
+                                        <td>{{ $data->created_at }}</td>
+                                        <td>{{ $data->alamat }}</td>
+                                        <td><span class="label label-table label-{{ ($data->jenis == 'SWAB') ? 'success' : 'primary' }}">{{$data->jenis}}</span></td>
+                                        <td><span class="label label-table label-{{ ($data->is_test == 1) ? 'success' : 'danger' }}">{{($data->is_test) ? 'Sudah' : 'Belum'}}</span></td>
+                                        <td><a href="/admin/registerTempat/{{ $data->id }}" class="btn btn-sm btn-success">Detail</a></td>
+
                                     </tr>
-                                    <tr>
-                                        <td>Isidra</td>
-                                        <td>Boudreaux</td>
-                                        <td>Traffic Court Referee</td>
-                                        <td>22 Jun 1972</td>
-                                        <td><span class="label label-table label-inverse">RAPID</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Isidra</td>
-                                        <td>Boudreaux</td>
-                                        <td>Traffic Court Referee</td>
-                                        <td>22 Jun 1972</td>
-                                        <td><span class="label label-table label-success">SWAB</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Isidra</td>
-                                        <td>Boudreaux</td>
-                                        <td>Traffic Court Referee</td>
-                                        <td>22 Jun 1972</td>
-                                        <td><span class="label label-table label-success">SWAB</span></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

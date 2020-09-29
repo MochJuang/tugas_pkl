@@ -25,12 +25,14 @@ class Client
     {
         return DB::table('tempats')->select('tempats.id', 'nama_tempat','alamat','foto', 'fasilitas', 'email', 'is_block')
         		->join('fasilitas_masters','tempats.id_fasilitas','=','fasilitas_masters.id','inner')
-        		->where(['is_konfirmasi' => 1, 'is_block' => 0])->where('nama_tempat','like',"%$key%")->orderBy('click','desc')->limit(3)->get();
+        		->where(['is_konfirmasi' => 1, 'is_block' => 0])->where('nama_tempat','like',"%$key%")->orderBy('click','desc')->limit(8)->get();
     }
     public static function vertifikasi($id)
     {
-        return DB::table('pendaftarans')->select('pendaftarans.id','nama','alamat','tgl_lahir','umur','email','jenis','harga','metode','qty','total_bayar','foto')
-                                ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
+        return DB::table('pendaftarans')->select('pendaftarans.id','nama','members.alamat','tgl_lahir','umur','members.email','jenis','harga','metode','qty','total_bayar','pendaftarans.foto')
+                                ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
+                                ->join('jenis','jenis.id_tempat','=','tempats.id')
+                                // ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
                                 ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
                                 ->join('members','members.id','=','pendaftarans.id_member')
                                 ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['pendaftarans.id' => $id])->first();
@@ -55,17 +57,21 @@ class Client
     		'metode'	=> 'required|numeric', 
     	]);
     	$id_member = Client::createMember($request);
-    	$harga = \App\Jenis::where(['id_tempat'	=> $id, 'id_jenis' => $result['test']])->first()->harga;
+        $id_jenis = \App\Jenis::where(['id' =>  $result['test']])->first()->id_jenis;
+    	$harga = \App\Jenis::where(['id_tempat'	=> $id, 'id_jenis' => $id_jenis])->first()->harga;
+        // dd($harga);
     	$data = [
     		'id_member'		=> $id_member,
     		'id_tempat' 	=> $id,
     		'id_metode'		=> $result['metode'],
-    		'id_jenis'		=> $result['test'],
+    		'id_jenis'		=> $id_jenis,
     		'is_sudah'		=> 0,
     		'qty'			=> $result['qty'],
-    		'foto'			=> 'foo',
-    		'total_bayar'	=> $result['qty'] * intval($harga)
+    		'foto'			=> 'foo',    
+    		'total_bayar'	=> $result['qty'] * intval($harga),
+            'created_at'    => date('Y-m-d')
     	];
+        // dd($data);
     	return ($id = DB::table('pendaftarans')->insertGetId($data)) ? $id : false;
 
     }

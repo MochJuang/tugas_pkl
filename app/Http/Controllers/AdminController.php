@@ -21,7 +21,11 @@ class AdminController extends Controller
     }
     public function daftar()
     {
-        return view('back.daftarMember');
+        $date = (!isset($_GET['date'])) ? date('Y-m-d') : $_GET['date'];
+        $data['data'] = Admin::daftar_pendaftar(session('user_token'),$date);
+        $data['date'] = $date;
+        // dd($data);
+        return view('back.daftarMember',$data);
     }
     public function test()
     {
@@ -30,8 +34,9 @@ class AdminController extends Controller
     public function veritedMember(Request $request)
     {
         foreach ($request->data as $key => $value) {
-            dump(Admin::putPendaftaran($value));
+            Admin::putPendaftaran($value,session('user_token'));
         }
+        return redirect('/admin/reg');
     }
     public function registerTempat($id)
     {
@@ -79,7 +84,7 @@ class AdminController extends Controller
     public function changeUser(Request $request)
     {
         $result = Admin::editUser($request,session('user_token'));            
-        return redirect('admin/editProfile')->with('message',$result['message']);
+        return redirect('admin/profile')->with('message',$result['message']);
     }   
     public function changeDeskripsi()
     {
@@ -94,7 +99,7 @@ class AdminController extends Controller
     }
     public function editJenis(Request $request)
     {
-        return (Admin::editJenis($request,session('user_token'))) ? redirect('admin/editProfile')->with('message','Berhasil Mengedit Jenis Test') : redirect('admin/editProfile')->with('message','Gagal Mengedit Jenis Test');
+        return (Admin::editJenis($request,session('user_token'))) ? redirect('admin/profile')->with('message','Berhasil Mengedit Jenis Test') : redirect('admin/profile')->with('message','Gagal Mengedit Jenis Test');
     }
 
 }

@@ -20,6 +20,7 @@ class CreatePendaftaran extends Migration
             $table->bigInteger('id_metode')->unsigned();
             $table->bigInteger('id_jenis')->unsigned();
             $table->boolean('is_sudah');
+            $table->boolean('is_test')->nullable();
             $table->string('foto');
             $table->integer('qty');
             $table->bigInteger('total_bayar');

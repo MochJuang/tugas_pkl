@@ -1,5 +1,5 @@
 @extends('back.layoutAdmin')
-@section('title','Dashboard')
+@section('title','Profile')
 @section('content')
 <meta name="csrf-token" content="{!! csrf_token() !!}">
 <link href="/back/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
@@ -45,18 +45,8 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="btn-group pull-right m-t-15">
-                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                    <h4 class="page-title">Dashboard 2</h4>
-                    <p class="text-muted page-title-alt">Welcome to Ubold admin panel !</p>
+                    <h4 class="page-title">Profile</h4>
+                    <p class="text-muted page-title-alt">Admin</p>
                 </div>
             </div>
             <div class="row">
@@ -132,7 +122,7 @@
                                                             <tr>
                                                                 <th>No HP</th>
                                                                 <td>
-                                                                        {{ $data->no_telp }}
+                                                                    {{ $data->no_telp }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -269,7 +259,7 @@
                                                             <div class="form-group ">
                                                                 <div class="col-xs-3">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input id="checkbox-swab" {{ ($jenis[0]->is_sedia) ? "checked" : null }} name="swab" type="checkbox" >
+                                                                        <input id="checkbox-swab" {{ ( $jenis[0]->is_sedia) ? 'checked' : '' }} name="swab" type="checkbox" >
                                                                         <label for="checkbox-swab"> Sedia
                                                                     </div>
                                                                 </div>
@@ -302,7 +292,7 @@
                                                             <div class="form-group ">
                                                                 <div class="col-xs-3">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input id="checkbox-rapid" {{ ($jenis[1]->is_sedia) ? "checked" : null }} name="rapid" type="checkbox" >
+                                                                        <input id="checkbox-rapid" {{ ($jenis[1]->is_sedia) ? "checked" : '' }} name="rapid" type="checkbox" >
                                                                         <label for="checkbox-rapid"> Sedia
                                                                     </div>
                                                                 </div>
@@ -362,25 +352,6 @@
                                                     <a href="/admin/changeDeskripsi" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                                 </p>
                                                 {!! $data->deskripsi !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                        <div class="card-header" role="tab" id="Auth">
-                                            <h5 class="mb-0">
-                                                <a data-toggle="collapse" data-parent="#profile" href="#peta" aria-expanded="true" aria-controls="auth">
-                                          <button class="btn btn-success btn-block">
-                                              Peta
-                                          </button>
-                                        </a>
-                                            </h5>
-                                        </div>
-                                        <div id="peta" class="collapse in" role="tabpanel" aria-labelledby="Auth">
-                                            <div class="card-body">
-                                                <div class="card-box">
-                                                    <div id="gmaps-markers" class="gmaps"></div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

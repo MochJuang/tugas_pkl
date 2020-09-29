@@ -13,7 +13,7 @@ class Auth
 
     public static function getId($token)
     {
-        return ($id = User::where(['no_token' => $token])->first()->id) ? $id :  false;
+        return ($id = User::where(['no_token' => $token])->first()) ? $id->id :  redirect('auth');
     }
 
     public static function register_user($request)

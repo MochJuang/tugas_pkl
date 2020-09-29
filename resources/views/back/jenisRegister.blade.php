@@ -1,5 +1,5 @@
 @extends('back.layoutAuth')
-@section('title','Login')
+@section('title','Pilih Jenis Test')
 
         @section('content')
         <div class="account-pages"></div>

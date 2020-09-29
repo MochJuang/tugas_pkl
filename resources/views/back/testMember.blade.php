@@ -24,6 +24,22 @@
                 <div class="col-12">
                     <div class="card-box">
                         <div class="card-header"><h3>Pegetesan</h3></div>
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label col-md-3">Set Tanggal</label>
+                                        <div class="col-md-7">
+                                            <input type="date" class="form-control" name="date">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-success">Set</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
                         <div class="card-body">
                             <table data-toggle="table"
                                     data-show-columns="false"

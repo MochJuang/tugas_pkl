@@ -8,7 +8,7 @@
 
 		<link rel="shortcut icon" href="/back/assets/images/favicon_1.ico">
 
-		<title>Ubold - Responsive Admin Dashboard Template</title>
+		<title>@yield('title')</title>
 
 		<link href="/back/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/back/assets/css/core.css" rel="stylesheet" type="text/css" />

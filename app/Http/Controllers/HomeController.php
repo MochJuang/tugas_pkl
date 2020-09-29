@@ -32,11 +32,6 @@ class HomeController extends Controller
         // dd($data);
         return view('front/detail', $data);
     }
-    public function click($id)
-    {
-        $num = \App\Tempat::find($id)->first()->click + 1;
-        return (\App\Tempat::find($id)->update(['click' => $num])) ? true : false;
-    }
     public function daftar($id)
     {
         $data['nama'] = \App\Tempat::find($id)->first()->nama_tempat;
@@ -48,7 +43,17 @@ class HomeController extends Controller
     }
     public function daftarAct(Request $request,$id)
     {
-        return ($result = Client::daftar($request,$id)) ? redirect("register/$result") : redirect("/daftar/$id",'refresh')->with('message','Gagal Daftar');
+        $result = Client::daftar($request,$id);
+        if ($result) {
+            if ($request->metode == 1) {
+                return redirect("register/$result");
+            }
+            else if ($request->metode == 2) {
+                return view('front/success');
+            }
+        }else{        
+            return redirect("/daftar/$id",'refresh')->with('message','Gagal Daftar');
+        }
     }
     public function register($id)
     {

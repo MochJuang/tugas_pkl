@@ -104,21 +104,21 @@ class Admin
         $result_2 = \App\Jenis::where(['id_tempat' => $id_tempat, 'id_jenis' => 2])->update($data[1]);
         return ($result_1 && $result_2) ? true : false;
     }
-    public static function getPendaftar($token)
+    public static function getPendaftar($token,$con = 0)
     {
         return DB::table('pendaftarans')->select('pendaftarans.id','nama','members.alamat','tgl_lahir','umur','members.email','jenis','harga','metode','qty','total_bayar','pendaftarans.foto')
+                    ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
                     ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
                     ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
-                    ->join('tempats','tempats.id','=','jenis.id_tempat')
                     ->join('members','members.id','=','pendaftarans.id_member')
-                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token)])->get();
+                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token), 'is_sudah' => $con ])->get();
     }
 
     // Menvertifikasi pendaftaran dan memasukannya ke table antrians
     private static function getCount($id_daftar,$tgl_test)
     {
         $id_tempat = Daftar::find($id_daftar)->id_tempat;
-        $data =  DB::table('antrians')->select('\count(antrians.id)\ as num \ ')
+        $data =  DB::table('antrians')->select('antrians.id')
             ->join('pendaftarans','pendaftarans.id','=','antrians.id_daftar')
             ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
             ->where(['is_sudah' => 1, 'tempats.id' => $id_tempat, 'antrians.tgl_test' => $tgl_test])->count();
@@ -132,7 +132,7 @@ class Admin
                 ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
                 ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
                 ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
-                ->where(['pendaftarans.id' => $id_daftar, 'jenis_masters.jenis' => $jenis])->first()->limit; 
+                ->where(['pendaftarans.id' => $id_daftar])->first()->limit; 
         return $data;
     }
     private static function getLastAntri($id,$date){
@@ -144,12 +144,13 @@ class Admin
         return ($data) ? $data->no_antrian : 0;
     }
 
-    public static function putPendaftaran($id)
+    public static function putPendaftaran($id,$token)
     {
+        $id_tempat = Auth::getIdTempat($token);
         $num = Admin::getCount($id,date('Y-m-d'));
         $limit = Admin::getLimit($id);
         $date = date('Y-m-d');
-
+        // dd([$num,$limit]);
         // return $last = Admin::getLastAntri(4,$date);
         if ($num == 0) {
             $goal = DB::table('antrians')->insert(['id_daftar' => $id, 'no_antrian' => 1, 'tgl_test' => date('Y-m-d')]);
@@ -166,7 +167,7 @@ class Admin
                 if ($num < $limit) {
                     if ($num == 0) {
                         $goal = DB::table('antrians')->insert(['id_daftar' => $id, 'no_antrian' => 1, 'tgl_test' => $date]);
-                        return 'awal besok';
+                        // return 'awal besok';
                     }else{
                         $last = Admin::getLastAntri($id,$date);
                         $goal = DB::table('antrians')->insert(['id_daftar' => $id, 'no_antrian' => $last + 1, 'tgl_test' => $date]);
@@ -179,4 +180,15 @@ class Admin
         \App\Pendaftaran::find($id)->update(['is_sudah' => 1]);
         return $goal;
     }
+    public static function daftar_pendaftar($token,$date)
+    {
+         return DB::table('antrians')->select('pendaftarans.id','nama','members.alamat','tgl_lahir','umur','members.email','is_test','jenis','harga','no_antrian','metode','qty','total_bayar','pendaftarans.foto','pendaftarans.created_at')
+                    ->join('pendaftarans','pendaftarans.id','=','antrians.id_daftar')
+                    ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
+                    ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
+                    ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
+                    ->join('members','members.id','=','pendaftarans.id_member')
+                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token), 'is_sudah' => 1, 'tgl_test' => $date ])->get();
+    }
+
 }

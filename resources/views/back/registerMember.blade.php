@@ -1,24 +1,6 @@
 @extends('back.layoutAdmin')
-@section('title','Dashboard')
+@section('title','Konfirmasi Pembayaran')
 @section('content')
-<script>
-        $(document).ready(function(){
-            console.log($('input#all').prop('checked'))
-        $('input#all').click(function(){
-
-            console.log($('input#all'));
-            if($(this).prop("checked") == true){
-                $('input.child').prop('checked',true)
-            }
-
-            else if($(this).prop("checked") == false){
-                $('input.child').prop('checked',false)
-            }
-
-        });
-
-    });
-</script>
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -27,18 +9,8 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="btn-group pull-right m-t-15">
-                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                    <h4 class="page-title">Dashboard 2</h4>
-                    <p class="text-muted page-title-alt">Welcome to Ubold admin panel !</p>
+                    <h4 class="page-title">Konfirmasi Pembayaran</h4>
+                    <p class="text-muted page-title-alt">Admin</p>
                 </div>
             </div>
 
@@ -47,10 +19,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title"><b>Checkbox Select</b></h4>
-                                <p class="text-muted m-b-30 font-13">
-                                    Example of checkbox select (Your text goes here).
-                                </p>
+                                <h4 class="m-t-0 header-title"><b>Silahkan Pilih Yang Ingin Di Konfirmasi</b></h4>
                                 <form action="/admin/veritedMember" method="post">
                                 {{ csrf_field() }}
                                 @method('put')
@@ -59,7 +28,7 @@
                                        data-pagination="true" class="table-bordered ">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox" id="all"></th>
+                                            <th></th>
                                             <th data-field="nama" data-switchable="false">Nama</th>
                                             <th data-field="jenis">Jenis Test</th>
                                             <th data-field="qty">QTY</th>

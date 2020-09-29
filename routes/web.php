@@ -17,12 +17,11 @@ use Illuminate\Support\Facades\Route;
 // Landing Page
 
 Route::get('/','HomeController@index');
-Route::get('/detail/{id}','HomeController@detail');
+Route::get('/detail/{id}','HomeController@detail')->middleware('addClick');
 Route::get('/cari','HomeController@cari');
-Route::get('/addClick/{id}','HomeController@addClick');
 Route::get('/daftar/{id}','HomeController@daftar');
 Route::get('/register/{id}','HomeController@register');
-Route::post('/success/{id}','HomeController@success');
+Route::post('/success','HomeController@success');
 Route::post('/daftarAct/{id}','HomeController@daftarAct');
 Route::post('/changeRegister/{id}','HomeController@changeRegister');
 

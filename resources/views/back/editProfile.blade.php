@@ -10,18 +10,8 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="btn-group pull-right m-t-15">
-                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                    <h4 class="page-title">Dashboard 2</h4>
-                    <p class="text-muted page-title-alt">Welcome to Ubold admin panel !</p>
+                    <h4 class="page-title">Edit Porofile</h4>
+                    <p class="text-muted page-title-alt">Admin</p>
                 </div>
             </div>
             @if(session()->has('message'))

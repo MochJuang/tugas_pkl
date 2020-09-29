@@ -1,5 +1,5 @@
 @extends('front.template')
-@section('title','Register')
+@section('title','CovMedia')
 @section('content')
 <script>
   $(document).ready(function() {
@@ -18,20 +18,14 @@
         success:function(data) {
           let result = ''
           $.each(data, function(index, val) {
-             result +=   `<div class="col-md-6 d-flex align-items-stretch" >
+             result +=   `<div class="col-md-3 d-flex align-items-stretch" >
                             <div class="card mb-3">
-                              <div class="row no-gutters">
-                                <div class="col-md-4">
-                                  <img src="/storage/${val.foto}" class="card-img img-fluid" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                  <div class="card-body">
-                                    <h5 class="card-title">${val.nama_tempat}</h5>
-                                    <p>${val.fasilitas} </p>
-                                    <p>${val.alamat} </p>
-                                    <a onclick="return addClick(${val.id})" href="/detail/${val.id}" class="card-link">Detail</a>
-                                  </div>
-                                </div>
+                              <img src="/storage/${val.foto}" class="card-img-top alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">${val.nama_tempat}</h5>
+                                <p>${val.fasilitas} </p>
+                                <p>${val.alamat} </p>
+                                <a href="/detail/${val.id}" class="card-link">Detail</a>
                               </div>
                             </div>    
                           </div>`
@@ -49,7 +43,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Ingin Mencari Tempat SWAB/Rapid Test</h1>
+          <h1>Tempat Mencari SWAB/Rapid Test Di Kota Medan</h1>
           <h2>Disinilah Tempatnya</h2>
           <div class="d-lg-flex">
           </div>
@@ -70,27 +64,26 @@
           <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>About Us</h2>
+                <h2>DiSarankan Untuk Anda</h2>
             </div>
 
             <div class="row">
               @foreach($data as $item)
+
               <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="card mb-3">
-                  <div class="row no-gutters">
-                    <div class="col-md-4">
-                      <img src="/storage/{{ $item->foto }}" class="card-img img-fluid" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ $item->nama_tempat }}</h5>
-                        <p>{{ $item->fasilitas }} </p>
-                        <p>{{ $item->alamat }} </p>
-                        <a onclick="return addClick(<?php echo $item->id ?>)"  class="card-link">Detail</a>
-                      </div>
-                    </div>
+                <div class="card" style="width: 18rem;">
+                  <img src="/storage/{{ $item->foto }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $item->nama_tempat }}</h5>
                   </div>
-                </div>    
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ $item->fasilitas }} </li>
+                    <li class="list-group-item">{{ $item->alamat }}</li>
+                  </ul>
+                  <div class="card-body">
+                    <a href="/detail/{{$item->id}}"  class="card-link">Detail</a>
+                  </div>
+                </div>
               </div>
               @endforeach
             </div>

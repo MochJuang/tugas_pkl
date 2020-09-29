@@ -1,5 +1,5 @@
 @extends('front.template')
-@section('title','Register')
+@section('title',$data->nama_tempat)
 @section('content')
 
 
