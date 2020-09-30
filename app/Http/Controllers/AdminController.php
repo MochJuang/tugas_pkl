@@ -13,6 +13,12 @@ use \Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    public function actTest(Request $request)
+    {
+        $result = Admin::setHasil($request->id, $request->input);
+        $message = ($result) ? "Berhasil" : "Gagal";
+    return redirect('/admin/test')->with('message',$message);
+    }
     public function register()
     {
         // dd(Admin::getPendaftar(session('user_token')));
@@ -29,7 +35,11 @@ class AdminController extends Controller
     }
     public function test()
     {
-        return view('back.testMember');
+        $date = (!isset($_GET['date'])) ? date('Y-m-d') : $_GET['date'];
+        $data['data'] = Admin::daftar_test(session('user_token'),$date);
+        $data['date'] = $date;
+        // dd($data);
+        return view('back.testMember',$data);
     }
     public function veritedMember(Request $request)
     {

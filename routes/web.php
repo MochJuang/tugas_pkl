@@ -61,3 +61,4 @@ Route::get('/admin/changeDeskripsi','AdminController@changeDeskripsi')->middlewa
 Route::put('/admin/actChangeDeskripsi','AdminController@actChangeDeskripsi')->middleware('login');
 Route::put('/admin/editJenis','AdminController@editJenis')->middleware('login');
 Route::put('/admin/veritedMember','AdminController@veritedMember')->middleware('login');
+Route::put('/admin/actTest','AdminController@actTest')->middleware('login');

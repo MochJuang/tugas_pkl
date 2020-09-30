@@ -188,7 +188,23 @@ class Admin
                     ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
                     ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
                     ->join('members','members.id','=','pendaftarans.id_member')
-                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token), 'is_sudah' => 1, 'tgl_test' => $date ])->get();
+                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token), 'is_sudah' => 1, 'tgl_test' => $date])->get();
+    }
+    public static function daftar_test($token,$date,$test = 0)
+    {
+         return DB::table('antrians')->select('pendaftarans.id','nama','members.alamat','tgl_lahir','umur','members.email','is_test','jenis','harga','no_antrian','metode','qty','total_bayar','pendaftarans.foto','pendaftarans.created_at')
+                    ->join('pendaftarans','pendaftarans.id','=','antrians.id_daftar')
+                    ->join('tempats','tempats.id','=','pendaftarans.id_tempat')
+                    ->join('jenis','jenis.id','=','pendaftarans.id_jenis')
+                    ->join('jenis_masters','jenis_masters.id','=','jenis.id_jenis')
+                    ->join('members','members.id','=','pendaftarans.id_member')
+                    ->join('metodes','metodes.id','=','pendaftarans.id_metode')->where(['tempats.id' => Auth::getIdTempat($token), 'is_sudah' => 1, 'tgl_test' => $date,'is_test' => 0 ])->get();
+    }
+    public static function setHasil($id_daftar, $hasil)
+    {
+        $daftar =\App\Pendaftaran::find($id_daftar)->update(['is_test' => 1]);
+        $result = \App\Hasil::create( ['id_pendaftaran' => $id_daftar, 'hasil' => $hasil] );
+        return ($daftar AND $result) ? true : false;
     }
 
 }

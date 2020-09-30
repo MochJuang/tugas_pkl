@@ -17,7 +17,6 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
-    @php print_r($errors) @endphp
     <div class="row">
         <div class="col">
              @if(session()->has('message'))
