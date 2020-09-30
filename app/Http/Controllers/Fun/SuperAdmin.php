@@ -22,7 +22,7 @@ class SuperAdmin
         return DB::table('jenis')->select('jenis.id', 'is_sedia', 'harga', 'limit', 'jenis')
                     ->join('jenis_masters','jenis.id_jenis','=','jenis_masters.id','inner')
                     ->join('tempats','tempats.id','=','jenis.id_tempat','inner')
-                    ->where(['jenis.id_tempat' => $id_tempat, 'is_sedia' => 1])->get();
+                    ->where(['jenis.id_tempat' => $id_tempat])->get();
     }
     public static function confirm($id)
     {
